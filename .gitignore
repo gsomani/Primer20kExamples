@@ -1,3 +1,4 @@
 Build/
 *.fs
 *.json
+*.history
