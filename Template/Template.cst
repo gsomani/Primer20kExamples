@@ -1,0 +1,149 @@
+// ---- Active constraints for the Template design (clk + led) ----
+IO_LOC "clk" H11;
+IO_LOC "led" N16;
+IO_PORT "clk" IO_TYPE=LVCMOS33;
+IO_PORT "led" IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+
+// ---- Full board reference (copied from Boards/TangPrimer20KDock.cst) ----
+// Everything below is commented out. Uncomment the ports your top module uses.
+
+// TangPrimer20KDock.cst : pin reference for Tang Primer 20K Dock (rev 3713), GW2A-LV18PG256C8/I7
+// Source: dock schematic sheet 1 (net -> ball paired by position in the PDF), plus H11 clock from the core board.
+// Format per line: IO_LOC "port" BALL;   // net, IO name, bank
+// Everything is commented out. Copy or uncomment only the ports your top module has,
+// then add one IO_PORT line per used port, e.g.:
+//   IO_PORT "led2" IO_TYPE=LVCMOS33 PULL_MODE=NONE;
+// Bank VCCIO is set on the core/dock boards and is NOT in this PDF: confirm it matches IO_TYPE.
+// Pins marked 'shared' are wired to more than one peripheral; do not use both at once.
+
+// ---- Clock (core board, not in the dock PDF) ----
+// IO_LOC "clk" H11;       // 27 MHz oscillator on the core board (not in the dock PDF)
+
+// ---- User LEDs: active low (+3V3 -> LED -> 510R -> pin); drive 0 to light ----
+// IO_LOC "led0" C13;       // Orange_LED0  (shared with DONE, config pin), IOR32B, bank 3
+// IO_LOC "led1" A13;       // Orange_LED1  (shared with READY, config pin), IOR31A, bank 3
+// IO_LOC "led2" N16;       // Orange_LED2, IOT52A, bank 1
+// IO_LOC "led3" N14;       // Orange_LED3, IOT52B, bank 1
+// IO_LOC "led4" L14;       // Orange_LED4, IOT34B, bank 1
+// IO_LOC "led5" L16;       // Orange_LED5, IOT34A, bank 1
+
+// ---- Push keys (silicone): idle high via 10K to 3V3/1V5, pressed = low (check pull-up rail on sheet 9) ----
+// IO_LOC "key1" T10;       // Silicone Key_1  (shared with FPGA_RST, careful), IOR35B, bank 3
+// IO_LOC "key2" T3;        // Silicone Key_2, IOB52B, bank 4
+// IO_LOC "key3" T2;        // Silicone Key_3, IOB48B, bank 4
+// IO_LOC "key4" D7;        // Silicone Key_4, IOL53B, bank 4
+// IO_LOC "key5" C7;        // Silicone Key_5, IOL40B, bank 4
+
+// ---- DIP switch SW3 (nets SW1..SW5 on sheet 1 = SW_01..SW_05 on sheet 9) ----
+// IO_LOC "sw1" B10;        // SW1  (shared with RECFG, config pin), IOR31B, bank 3
+// IO_LOC "sw2" E9;         // SW2, IOL38B, bank 4
+// IO_LOC "sw3" E8;         // SW3, IOL45B, bank 4
+// IO_LOC "sw4" T4;         // SW4, IOB45B, bank 4
+// IO_LOC "sw5" T5;         // SW5, IOB54B, bank 4
+
+// ---- BL702 USB-UART bridge (names are from the BL702 side) ----
+// IO_LOC "uartTx" M11;     // FPGA TX -> BL702_UART1_RX, IOR27B, bank 2
+// IO_LOC "uartRx" T13;     // FPGA RX <- BL702_UART1_TX, IOR8B, bank 2
+
+// ---- WS2812B RGB LED + MIC array header ----
+// IO_LOC "ws2812Dat" T9;   // WS2812-DAT, IOR38A, bank 3
+// IO_LOC "micLedClk" P9;   // MIC_LED_CLK, IOR38B, bank 3
+// IO_LOC "micDat0" P8;     // MIC_DAT0, IOR42A, bank 3
+// IO_LOC "micDat1" T8;     // MIC_DAT1, IOR42B, bank 3
+// IO_LOC "micDat2" R8;     // MIC_DAT2, IOR29B, bank 3
+// IO_LOC "micDat3" T7;     // MIC_DAT3, IOR29A, bank 3
+// IO_LOC "micWs" P6;       // MIC_WS, IOR53A, bank 3
+// IO_LOC "micBck" T6;      // MIC_BCK, IOR53B, bank 3
+
+// ---- Audio (I2S DAC + amp) ----
+// IO_LOC "hpBck" N15;      // HP_BCK, IOT48A, bank 1
+// IO_LOC "hpWs" P16;       // HP_WS, IOT48B, bank 1
+// IO_LOC "hpDin" P15;      // HP_DIN, IOT54A, bank 1
+// IO_LOC "paEn" R16;       // PA_EN, IOT54B, bank 1
+
+// ---- USB 2.0 PHY (USB3317, ULPI) on bank 7/0/1/2 ----
+// IO_LOC "usbData0" G11;   // USB_DATA0, IOT14A, bank 0
+// IO_LOC "usbData1" H12;   // USB_DATA1, IOT14B, bank 0
+// IO_LOC "usbData2" J12;   // USB_DATA2, IOT18B, bank 0
+// IO_LOC "usbData3" H13;   // USB_DATA3, IOT18A, bank 0
+// IO_LOC "usbData4" T14;   // USB_DATA4, IOR20B, bank 2
+// IO_LOC "usbData5" R13;   // USB_DATA5, IOR20A, bank 2
+// IO_LOC "usbData6" P13;   // USB_DATA6, IOR11B, bank 2
+// IO_LOC "usbData7" R12;   // USB_DATA7, IOR11A, bank 2
+// IO_LOC "usbReset" F10;   // USB_RESET  (shared with ethPhyRst), IOL11A, bank 7
+// IO_LOC "usbNxt" K13;     // USB_NXT, IOT36A, bank 1
+// IO_LOC "usbDir" K12;     // USB_DIR, IOT36B, bank 1
+// IO_LOC "usbStp" K11;     // USB_STP, IOT38A, bank 1
+// IO_LOC "usbClkOut" T15;  // USB_CLKOUT (60 MHz), IOR7A, bank 2
+
+// ---- HDMI TX (P/N pairs; TMDS needs a differential IO_TYPE) ----
+// IO_LOC "hdmiTx0P" H14;   // HDMI_TX0_P, IOT20A, bank 0
+// IO_LOC "hdmiTx0N" H16;   // HDMI_TX0_N, IOT20B, bank 0
+// IO_LOC "hdmiTx1P" J15;   // HDMI_TX1_P, IOT24A, bank 0
+// IO_LOC "hdmiTx1N" K16;   // HDMI_TX1_N, IOT24B, bank 0
+// IO_LOC "hdmiTx2P" K14;   // HDMI_TX2_P, IOT30A, bank 1
+// IO_LOC "hdmiTx2N" K15;   // HDMI_TX2_N, IOT30B, bank 1
+// IO_LOC "hdmiTxcP" G16;   // HDMI_TXC_P, IOT16A, bank 0
+// IO_LOC "hdmiTxcN" H15;   // HDMI_TXC_N, IOT16B, bank 0
+// IO_LOC "hdmiHpd" J11;    // HDMI_HPD, IOT32A, bank 1
+// IO_LOC "hdmiCec" L12;    // HDMI_CEC, IOT32B, bank 1
+// IO_LOC "hdmiSda" F14;    // HDMI_SDA  (shared I2C pin), IOT9A, bank 0
+// IO_LOC "hdmiScl" F16;    // HDMI_SCL  (shared I2C pin), IOT9B, bank 0
+
+// ---- Ethernet PHY RTL8201F (RMII) ----
+// IO_LOC "ethTxd0" D16;    // RTL_PHY_TXD0, IOT4A, bank 0
+// IO_LOC "ethTxd1" E14;    // RTL_PHY_TXD1, IOT4B, bank 0
+// IO_LOC "ethTxEn" E16;    // RTL_PHY_TXEN, IOT6A, bank 0
+// IO_LOC "ethRxd0" F15;    // RTL_PHY_RXD0, IOT6B, bank 0
+// IO_LOC "ethRxd1" C9;     // RTL_PHY_RXD1, IOL27B, bank 7
+// IO_LOC "ethCrs" M6;      // RTL_PHY_CRS, IOR44A, bank 3
+// IO_LOC "ethRxEr" L8;     // RTL_PHY_RXER, IOR44B, bank 3
+// IO_LOC "ethTxClk" A9;    // RTL_PHY_TXCLK (50 MHz ref), IOL27A, bank 7
+// IO_LOC "ethPhyRst" F10;  // RTL_PHY_~RST  (shared with usbReset), IOL11A, bank 7
+// IO_LOC "ethMdc" F14;     // RTL_PHY_MDC  (shared I2C pin), IOT9A, bank 0
+// IO_LOC "ethMdio" F16;    // RTL_PHY_MDIO (shared I2C pin), IOT9B, bank 0
+
+// ---- RGB LCD (40-pin, 16-bit 5-6-5) + touch panel ----
+// IO_LOC "lcdR0" L9;       // RGB_LCD_R0, IOR40B, bank 3
+// IO_LOC "lcdR1" N8;       // RGB_LCD_R1, IOR40A, bank 3
+// IO_LOC "lcdR2" N9;       // RGB_LCD_R2, IOR36B, bank 3
+// IO_LOC "lcdR3" N7;       // RGB_LCD_R3, IOR47B, bank 3
+// IO_LOC "lcdR4" N6;       // RGB_LCD_R4, IOR51A, bank 3
+// IO_LOC "lcdG0" D11;      // RGB_LCD_G0, IOL22A, bank 7
+// IO_LOC "lcdG1" A11;      // RGB_LCD_G1, IOL15A, bank 7
+// IO_LOC "lcdG2" B11;      // RGB_LCD_G2, IOL13A, bank 7
+// IO_LOC "lcdG3" P7;       // RGB_LCD_G3, IOR49B, bank 3
+// IO_LOC "lcdG4" R7;       // RGB_LCD_G4, IOR49A, bank 3
+// IO_LOC "lcdG5" D10;      // RGB_LCD_G5, IOL17A, bank 7
+// IO_LOC "lcdB0" B12;      // RGB_LCD_B0, IOL7B, bank 7
+// IO_LOC "lcdB1" C12;      // RGB_LCD_B1, IOL7A, bank 7
+// IO_LOC "lcdB2" B13;      // RGB_LCD_B2, IOL8A, bank 7
+// IO_LOC "lcdB3" A14;      // RGB_LCD_B3, IOL8B, bank 7
+// IO_LOC "lcdB4" B14;      // RGB_LCD_B4, IOL2A, bank 7
+// IO_LOC "lcdClk" R9;      // RGB_LCD_CLK, IOR35A, bank 3
+// IO_LOC "lcdHsync" A15;   // RGB_LCD_HSYNC, IOL2B, bank 7
+// IO_LOC "lcdVsync" D14;   // RGB_LCD_VSYNC, IOT44A, bank 1
+// IO_LOC "lcdDe" E15;      // RGB_LCD_DE, IOT44B, bank 1
+// IO_LOC "lcdBl" E10;      // RGB_LCD_BL (backlight enable), IOL17B, bank 7
+// IO_LOC "tpSda" F14;      // TP_SDA  (shared I2C pin), IOT9A, bank 0
+// IO_LOC "tpScl" F16;      // TP_SCK  (shared I2C pin), IOT9B, bank 0
+// IO_LOC "tpInt" C11;      // TP_INT, IOL15B, bank 7
+// IO_LOC "tpRst" A12;      // TP_RST, IOL13B, bank 7
+
+// ---- DVP camera (DOVDD = bank voltage, 2.8 V rail on this dock rev; check before driving) ----
+// IO_LOC "dvpD0" T12;      // DVP_D0, IOR17B, bank 2
+// IO_LOC "dvpD1" T11;      // DVP_D1, IOR24A, bank 2
+// IO_LOC "dvpD2" P11;      // DVP_D2, IOR24B, bank 2
+// IO_LOC "dvpD3" R11;      // DVP_D3, IOR17A, bank 2
+// IO_LOC "dvpD4" M15;      // DVP_D4, IOT40B, bank 1
+// IO_LOC "dvpD5" M14;      // DVP_D5, IOT40A, bank 1
+// IO_LOC "dvpD6" J16;      // DVP_D6, IOT22A, bank 0
+// IO_LOC "dvpD7" J14;      // DVP_D7, IOT22B, bank 0
+// IO_LOC "dvpScl" F14;     // DVP_SCL  (shared I2C pin), IOT9A, bank 0
+// IO_LOC "dvpSda" F16;     // DVP_SDA  (shared I2C pin), IOT9B, bank 0
+// IO_LOC "dvpPclk" F13;    // DVP_PCLK, IOR7A, bank 0
+// IO_LOC "dvpXclk" G12;    // DVP_XCLK, IOR7A, bank 0
+// IO_LOC "dvpRst" L13;     // DVP_RST, IOT38B, bank 1
+// IO_LOC "dvpPwdn" C10;    // DVP_PWDN, IOR39A, bank 3
+// IO_LOC "dvpVsync" G15;   // DVP_VSYNC, IOT13A, bank 0
+// IO_LOC "dvpHsync" G14;   // DVP_HSYNC, IOT13B, bank 0
