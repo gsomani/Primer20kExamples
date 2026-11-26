@@ -2,6 +2,8 @@
 
 Open-source toolchain: Yosys, nextpnr-himbaechel, gowin_pack, openFPGALoader.
 
+Requires the `OSS_CAD_SUITE` environment variable (e.g. in `~/.bashrc`) pointing to your oss-cad-suite install; `Common.mk` sources `$OSS_CAD_SUITE/environment` for every tool invocation.
+
 ## Layout
 - `examples/Blinky` – blink an LED
 - `examples/LedChaser` – 4-LED chaser
